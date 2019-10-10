@@ -1,0 +1,101 @@
+{
+  "name": "kanban-light",
+  "version": "0.0.1",
+  "description": "A light-weight Kanban application",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Firef0x/kanban-light.git"
+  },
+  "keywords": [
+    "Kanban"
+  ],
+  "author": "Firef0x",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Firef0x/kanban-light/issues"
+  },
+  "homepage": "https://github.com/Firef0x/kanban-light#readme",
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run copyStatic && cross-env NODE_ENV=production webpack --progress --config config/webpack.prod.js",
+    "clean": "rimraf public",
+    "copyStatic": "cpx \"static/**/*.*\" public/",
+    "dev": "npm run copyStatic && cross-env NODE_ENV=development NPCONFIG=dev node --inspect src/www",
+    "lint": "eslint --ext .js,.jsx client-react src stories",
+    "start": "cross-env NODE_ENV=production node src/www",
+    "startProd": "npm run copyStatic && cross-env NODE_ENV=production node src/www",
+    "test": "node config/test.js",
+    "test:cover": "npm test -- --coverage",
+    "test:update": "npm test -- --updateSnapshot"
+  },
+  "browserslist": [
+    "> 0.2%",
+    "not dead",
+    "not ie <= 8",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.0.3",
+    "json-stringify-safe": "^5.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-router": "^3.2.4",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "reselect": "^4.0.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "autoprefixer": "^9.4.3",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-jest": "^24.9.0",
+    "chai": "^4.2.0",
+    "cross-env": "^6.0.3",
+    "css-loader": "^2.0.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "husky": "^3.0.8",
+    "jest": "^24.9.0",
+    "jest-enzyme": "^7.1.1",
+    "jest-html-reporter": "^2.5.0",
+    "jsdom": "^13.1.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^9.4.2",
+    "mini-css-extract-plugin": "^0.5.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "react-hot-loader": "^4.12.15",
+    "rimraf": "^2.6.2",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
+  }
+}
