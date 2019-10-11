@@ -35,6 +35,7 @@ module.exports = {
     'no-debugger': 'off',
     'no-lone-blocks': 'off',
     'no-underscore-dangle': 'off',
+    'react/destructuring-assignment': 'off',
     'react/forbid-prop-types': 'warn',
     'react/jsx-closing-bracket-location': ['warn', 'tag-aligned'],
     'react/jsx-filename-extension': 'off',

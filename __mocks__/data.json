@@ -1,0 +1,47 @@
+{
+  "cardsList": [
+    {
+      "id": 1,
+      "title": "Read the Book",
+      "description": "I should read the whole book",
+      "status": "I",
+      "tasks": []
+    },
+    {
+      "id": 2,
+      "title": "Write some code",
+      "description": "Code along with the samples in the book",
+      "status": "T",
+      "tasks": [
+        {
+          "id": 1,
+          "name": "ContactList Example",
+          "done": true
+        },
+        {
+          "id": 2,
+          "name": "Kanban Example",
+          "done": false
+        },
+        {
+          "id": 3,
+          "name": "My Own Experiments",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Borrow the Book",
+      "description": "I should borrow the book from library",
+      "status": "D",
+      "tasks": [
+        {
+          "id": 1,
+          "name": "Borrow the Book",
+          "done": true
+        }
+      ]
+    }
+  ]
+}
