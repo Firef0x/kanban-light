@@ -3,6 +3,7 @@
     {
       "id": 1,
       "title": "Read the Book",
+      "color": "#bd8d31",
       "description": "I should read the whole book",
       "status": "I",
       "tasks": []
@@ -10,6 +11,7 @@
     {
       "id": 2,
       "title": "Write some code",
+      "color": "#3a7e28",
       "description": "Code along with the samples in the book",
       "status": "T",
       "tasks": [
@@ -33,6 +35,7 @@
     {
       "id": 3,
       "title": "Borrow the Book",
+      "color": "#303030",
       "description": "I should borrow the book from library",
       "status": "D",
       "tasks": [

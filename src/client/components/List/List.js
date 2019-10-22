@@ -9,8 +9,10 @@ export default class List extends PureComponent {
     if (cards && Array.isArray(cards)) {
       arrCards = cards.map(card => (
         <Card
+          color={card.color}
           description={card.description}
           id={card.id}
+          key={card.id}
           tasks={card.tasks}
           title={card.title}
         />
