@@ -28,9 +28,9 @@ export default class KanbanLight extends PureComponent {
 }
 
 KanbanLight.propTypes = {
-  cards: PropTypes.array
+  cards: PropTypes.arrayOf(PropTypes.object)
 };
 
 KanbanLight.defaultProps = {
-  cards: []
+  cards: [{}]
 };

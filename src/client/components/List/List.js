@@ -1,8 +1,10 @@
+/* eslint-disable react/prefer-stateless-function */
+
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Card from '../Card/Card';
 
-export default class List extends PureComponent {
+export default class List extends Component {
   render() {
     let arrCards = [];
     const { cards, title } = this.props;
@@ -31,6 +33,6 @@ export default class List extends PureComponent {
 }
 
 List.propTypes = {
-  cards: PropTypes.array,
+  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string
 };

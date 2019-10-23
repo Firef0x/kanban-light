@@ -39,6 +39,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "core-js": "^3.3.3",
     "dompurify": "^2.0.6",
     "express": "^4.17.1",
     "hbs": "^4.0.3",
@@ -51,7 +52,8 @@
     "react-router": "^3.2.4",
     "redux": "^4.0.4",
     "reselect": "^4.0.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.3",

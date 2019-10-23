@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import CheckList from '../CheckList/CheckList';
 import formatMarkdown from '../../utils/formatMarkdown';
 import titlePropType from '../../utils/titlePropType';
 
-export default class Card extends PureComponent {
+export default class Card extends Component {
   constructor() {
     super();
     this.state = {

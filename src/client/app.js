@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import KanbanLight from './components/KanbanLight/KanbanLight';
-import * as mockData from '../../__mocks__/data.json';
+import KanbanLightContainer from './containers/KanbanLightContainer/KanbanLightContainer';
 
-const { cardsList } = mockData;
+/* Import Less styles */
+import './app.less';
 
 const component = (
-  <div>
-    <KanbanLight cards={cardsList} />
+  <div id="app">
+    <KanbanLightContainer />
   </div>
 );
 const appDiv = document.getElementById('root');
