@@ -1,0 +1,17 @@
+.list__container {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  width: 33%;
+  padding: 0 2rem;
+  overflow: auto;
+
+  &:not(:last-child):after {
+    position: absolute;
+    content: " ";
+    width: 1%;
+    height: 99%;
+    top: 0;
+    right: 0;
+  }
+}
