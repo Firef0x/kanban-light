@@ -42,4 +42,6 @@ $Recycle.Bin
 
 # Test Report
 test-report.html
+lint-report.html
+stylelint-report.html
 /mochawesome-report

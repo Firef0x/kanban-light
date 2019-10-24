@@ -9,6 +9,7 @@ const titlePropType = (props, propName, componentName) => {
       );
     }
   }
+  return true;
 };
 
 export default titlePropType;
