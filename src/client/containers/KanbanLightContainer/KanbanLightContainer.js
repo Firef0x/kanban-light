@@ -1,4 +1,4 @@
-import 'core-js/stable';
+import 'core-js';
 import update from 'immutability-helper';
 import React, { Component } from 'react';
 import 'whatwg-fetch';
