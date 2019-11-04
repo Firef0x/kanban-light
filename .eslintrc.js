@@ -1,17 +1,13 @@
 module.exports = {
-  extends: ['airbnb', 'react-app'],
-  plugins: ['import', 'react'],
-  settings: {
-    'import/resolver': {
-      webpack: { config: './internals/webpack/resolvers.babel.js' }
-    }
-  },
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: 'module'
-  },
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:jsx-a11y/recommended'
+  ],
+  parser: 'babel-eslint',
   env: {
     browser: true,
+    commonjs: true,
     es6: true,
     jest: true,
     node: true
@@ -38,10 +34,11 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'react/forbid-prop-types': 'warn',
     'react/jsx-closing-bracket-location': ['warn', 'tag-aligned'],
-    'react/jsx-filename-extension': 'off',
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
     'react/jsx-indent': ['warn', 2],
     'react/jsx-indent-props': ['error', 2],
     'react/jsx-no-target-blank': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
     'react/no-children-prop': 'off',
     'react/no-set-state': 'off',

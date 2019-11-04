@@ -13,7 +13,8 @@ module.exports = {
         'refactor',
         'revert',
         'style',
-        'test'
+        'test',
+        'chore'
       ]
     ],
     'scope-empty': [0, 'never'],
