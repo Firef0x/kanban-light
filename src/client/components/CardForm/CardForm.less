@@ -1,0 +1,60 @@
+.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.card__container.big {
+  position: absolute;
+  width: 54rem;
+  height: 25rem;
+  margin: auto;
+  padding: 1.5rem;
+  top: 0;
+  left: 0;
+  bottom: 10rem;
+  right: 0;
+  z-index: 3;
+
+  input[type=text],
+  textarea {
+    width: 100%;
+    margin: 0.3rem 0;
+    font-size: 1.3rem;
+    border: none;
+  }
+
+  input[type=text] {
+    font-weight: bold;
+  }
+
+  input[type=text]:focus,
+  textarea:focus {
+    outline: dashed thin #999;
+    outline-offset: 0.2rem;
+  }
+
+  label {
+    margin: 0.3rem 0 0.7rem 0.3rem;
+    color: #a7a7a7;
+    display: inline-block;
+    width: 6rem;
+  }
+
+  .actions {
+    margin-top: 1rem;
+    text-align: right;
+
+    button: {
+      font-size: 1.4rem;
+      padding: 0.8rem;
+      border-radius: 0.2rem;
+    }
+  }
+}
