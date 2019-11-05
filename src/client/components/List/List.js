@@ -16,7 +16,7 @@ class List extends Component {
       title
     } = this.props;
     if (cards && Array.isArray(cards)) {
-      arrCards = cards.map(card => (
+      arrCards = cards.map((card) => (
         <Card
           cardCallbacks={cardCallbacks}
           color={card.color}
@@ -59,7 +59,7 @@ const listTargetSpec = {
   }
 };
 
-const collectDrop = (connect, monitor) => ({
+const collectDrop = (connect) => ({
   connectDropTarget: connect.dropTarget()
 });
 

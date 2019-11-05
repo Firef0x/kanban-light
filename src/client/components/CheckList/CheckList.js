@@ -16,7 +16,7 @@ export default class CheckList extends Component {
 
     return (
       <KanbanLightContext.Consumer>
-        {taskCallbacks => (
+        {(taskCallbacks) => (
           <div className="checklist">
             <ul>
               {tasks.map((task, taskIndex) => (
