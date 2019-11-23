@@ -24,10 +24,10 @@
     "build": "npm run clean && npm run copyStatic && cross-env NODE_ENV=production webpack --progress --config config/webpack.prod.js",
     "clean": "rimraf public",
     "copyStatic": "cpx \"static/**/*.*\" public/",
-    "dev": "npm run copyStatic && cross-env NODE_ENV=development NPCONFIG=dev node --inspect src/www",
+    "dev": "npm run copyStatic && cross-env NODE_ENV=development NPCONFIG=dev node --inspect src/server/www",
     "lint": "eslint --ext .js,.jsx -f ./node_modules/eslint-html-reporter/reporter.js -o lint-report.html src",
-    "start": "cross-env NODE_ENV=production node src/www",
-    "startProd": "npm run copyStatic && cross-env NODE_ENV=production node src/www",
+    "start": "cross-env NODE_ENV=production node src/server/www",
+    "startProd": "npm run copyStatic && cross-env NODE_ENV=production node src/server/www",
     "test": "node config/test.js",
     "test:cover": "npm test -- --coverage",
     "test:update": "npm test -- --updateSnapshot"
@@ -56,6 +56,7 @@
     "react-router-dom": "^5.1.2",
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.4",
+    "redux-thunk": "2.3.0",
     "reselect": "^4.0.0",
     "serve-favicon": "^2.5.0",
     "whatwg-fetch": "^3.0.0"

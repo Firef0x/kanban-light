@@ -13,7 +13,8 @@
         }],
         "@babel/preset-react",
         "jest"
-      ]
+      ],
+      "plugins": ["@babel/plugin-proposal-class-properties"]
     }
   }
 }
