@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 import './NavBar.less';
 
 const NavBar = () => (
-  <div className="navbar__float-button">
-    <Link to="/new">
-      +
-    </Link>
-  </div>
+  <Link to="/new" className="navbar__float-button">
+    +
+  </Link>
 );
 
 export default NavBar;
