@@ -16,7 +16,9 @@ export default class NewCard extends Component {
   }
 
   handleClose = () => {
-    this.props.history.pushState(null, '/');
+    if (this.props && this.props.history) {
+      this.props.history.pushState(null, '/');
+    }
   }
 
   handleFormChange = (field, value) => {

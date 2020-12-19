@@ -1,9 +1,12 @@
 import 'core-js';
 import update from 'immutability-helper';
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import 'whatwg-fetch';
 import throttle from 'lodash.throttle';
 import KanbanLight from '../../components/KanbanLight/KanbanLight';
+import NewCard from '../../components/NewCard/NewCard';
+import EditCard from '../../components/EditCard/EditCard';
 import KanbanLightContext from '../../utils/KanbanLightContext';
 import { API_HEADERS, API_URL, MOCK_JSON } from '../../utils/constants';
 import * as mockData from '../../../../__mocks__/data.json';
@@ -28,7 +31,7 @@ export default class KanbanLightContainer extends Component {
       window.fetch(`${API_URL}/cards`, {
         headers: API_HEADERS,
         method: 'GET'
-      }).then(response => response.json())
+      }).then((response) => response.json())
         .then((response) => {
           this.setState({
             cards: response
@@ -40,9 +43,78 @@ export default class KanbanLightContainer extends Component {
     }
   }
 
+  addCard = (paramCard) => {
+    const previousState = { ...this.state };
+    const card = { ...paramCard };
+    const self = this;
+
+    /* Add temporary ID to the card */
+    if (!card.id) {
+      card.id = Date.now();
+    }
+
+    const nextState = update(previousState.cards, {
+      $push: [card]
+    });
+    this.setState({
+      cards: nextState
+    });
+
+    window.fetch(`${API_URL}/cards`, {
+      headers: API_HEADERS,
+      method: 'POST',
+      body: JSON.stringify(card)
+    }).then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          card.id = response.id;
+          self.setState({
+            cards: nextState
+          });
+        } else {
+          throw new Error(response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error in add card', error);
+        self.setState(previousState);
+      });
+  }
+
+  updateCard = (paramCard) => {
+    const previousState = { ...this.state };
+    const card = { ...paramCard };
+    const cardIndex = card.findIndex((ca) => ca.id === card.id);
+    const self = this;
+
+    const nextState = update(previousState.cards, {
+      [cardIndex]: {
+        $set: card
+      }
+    });
+    this.setState({
+      cards: nextState
+    });
+
+    window.fetch(`${API_URL}/cards/${card.id}`, {
+      headers: API_HEADERS,
+      method: 'PUT',
+      body: JSON.stringify(card)
+    }).then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error in update card', error);
+        self.setState(previousState);
+      });
+  }
+
   addTask = (cardId, taskName) => {
     if (Array.isArray(this.state.cards)) {
-      const cardIndex = this.state.cards.findIndex(card => card.id === cardId);
+      const cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
       const self = this;
       const newTask = {
         id: Date.now(),
@@ -54,7 +126,7 @@ export default class KanbanLightContainer extends Component {
         headers: API_HEADERS,
         method: 'POST',
         body: JSON.stringify(newTask)
-      }).then(response => response.json())
+      }).then((response) => response.json())
         .then((response) => {
           if (response.ok) {
             newTask.id = response.id;
@@ -83,11 +155,11 @@ export default class KanbanLightContainer extends Component {
   deleteTask = (cardId, taskId, taskIndex) => {
     if (Array.isArray(this.state.cards)) {
       const self = this;
-      const cardIndex = this.state.cards.findIndex(card => card.id === cardId);
+      const cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
       window.fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
         headers: API_HEADERS,
         method: 'DELETE'
-      }).then((response) => {
+      }).then(() => {
         self.setState((prevState) => {
           const nextCards = update(prevState.cards, {
             [cardIndex]: {
@@ -108,7 +180,7 @@ export default class KanbanLightContainer extends Component {
     if (Array.isArray(this.state.cards)) {
       const self = this;
       let newDoneValue;
-      const cardIndex = this.state.cards.findIndex(card => card.id === cardId);
+      const cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
       const nextCards = update(this.state.cards, {
         [cardIndex]: {
           tasks: {
@@ -129,7 +201,7 @@ export default class KanbanLightContainer extends Component {
         body: JSON.stringify({
           done: newDoneValue
         })
-      }).then((response) => {
+      }).then(() => {
         self.setState({
           cards: nextCards
         });
@@ -140,7 +212,7 @@ export default class KanbanLightContainer extends Component {
   sendCardData = (cardId, status) => {
     const self = this;
     const { cards } = this.state;
-    const cardIndex = cards.findIndex(card => card.id === cardId);
+    const cardIndex = cards.findIndex((card) => card.id === cardId);
     const currentCard = cards[cardIndex];
     window.fetch(`${API_URL}/cards/${cardId}`, {
       headers: API_HEADERS,
@@ -149,7 +221,7 @@ export default class KanbanLightContainer extends Component {
         status: currentCard.status,
         row_order_position: cardIndex
       })
-    }).then(response => response.json())
+    }).then((response) => response.json())
       .then((response) => {
         if (!response.ok) {
           throw new Error(response);
@@ -157,7 +229,7 @@ export default class KanbanLightContainer extends Component {
       })
       .catch((error) => {
         console.error('Error in updating card', error);
-        self.setState(prevState => (
+        self.setState((prevState) => (
           update(prevState, {
             cards: {
               [cardIndex]: {
@@ -174,10 +246,10 @@ export default class KanbanLightContainer extends Component {
   updateCardPosition(cardId, afterCardId) {
     if (cardId !== afterCardId) {
       const { cards } = this.state;
-      const cardIndex = cards.findIndex(card => card.id === cardId);
+      const cardIndex = cards.findIndex((card) => card.id === cardId);
       const currentCard = cards[cardIndex];
-      const afterCardIndex = cards.findIndex(card => card.id === afterCardId);
-      this.setState(prevState => (
+      const afterCardIndex = cards.findIndex((card) => card.id === afterCardId);
+      this.setState((prevState) => (
         update(prevState, {
           cards: {
             $splice: [
@@ -192,10 +264,10 @@ export default class KanbanLightContainer extends Component {
 
   updateCardStatus(cardId, listId) {
     const { cards } = this.state;
-    const cardIndex = cards.findIndex(card => card.id === cardId);
+    const cardIndex = cards.findIndex((card) => card.id === cardId);
     const currentCard = cards[cardIndex];
     if (currentCard.status !== listId) {
-      this.setState(prevState => (
+      this.setState((prevState) => (
         update(prevState, {
           cards: {
             [cardIndex]: {
@@ -220,14 +292,23 @@ export default class KanbanLightContainer extends Component {
           }
         }}
       >
-        <KanbanLight
-          cards={this.state.cards}
-          cardCallbacks={{
-            sendCardData: this.sendCardData,
-            updateCardPosition: this.updateCardPosition,
-            updateCardStatus: this.updateCardStatus
-          }}
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <KanbanLight
+              {...props}
+              cards={this.state.cards}
+              cardCallbacks={{
+                sendCardData: this.sendCardData,
+                updateCardPosition: this.updateCardPosition,
+                updateCardStatus: this.updateCardStatus
+              }}
+            />
+          )}
         />
+        <Route path="/new" component={NewCard} />
+        <Route path="/edit/:cardid" component={EditCard} />
       </KanbanLightContext.Provider>
     );
   }
