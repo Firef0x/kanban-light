@@ -6,6 +6,9 @@ import { DropTarget } from 'react-dnd';
 import Card from '../Card/Card';
 import { CARD } from '../../utils/constants';
 
+/* Import Less style */
+import './List.less';
+
 class List extends Component {
   render() {
     let arrCards = [];

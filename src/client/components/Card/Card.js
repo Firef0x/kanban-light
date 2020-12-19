@@ -2,12 +2,16 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { DragSource, DropTarget } from 'react-dnd';
 import CheckList from '../CheckList/CheckList';
 import { CARD } from '../../utils/constants';
 import formatMarkdown from '../../utils/formatMarkdown';
 import titlePropType from '../../utils/titlePropType';
+
+/* Import Less style */
+import './Card.less';
 
 class Card extends Component {
   constructor(...args) {
@@ -18,7 +22,7 @@ class Card extends Component {
   }
 
   toggleDetails = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       showDetails: !prevState.showDetails
     }));
   }
@@ -50,11 +54,16 @@ class Card extends Component {
         />
         <CheckList cardId={id} tasks={tasks} />
       </div>
-    ) : '';
+    ) : <div />;
 
     return connectDropTarget(connectDragSource(
       <div className="card__container">
         <div style={containerStyle} />
+        <div className="card__button--edit">
+          <Link to={`/edit/${id}`}>
+            &#9998;
+          </Link>
+        </div>
         <div
           className={`card__title${
             this.state.showDetails
@@ -97,7 +106,7 @@ Card.defaultProps = {
 };
 
 const cardDragSpec = {
-  beginDrag: props => ({
+  beginDrag: (props) => ({
     id: props.id,
     status: props.status
   }),
@@ -113,11 +122,11 @@ const cardDropSpec = {
   }
 };
 
-const collectDrag = (connect, monitor) => ({
+const collectDrag = (connect) => ({
   connectDragSource: connect.dragSource()
 });
 
-const collectDrop = (connect, monitor) => ({
+const collectDrop = (connect) => ({
   connectDropTarget: connect.dropTarget()
 });
 
