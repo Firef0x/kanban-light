@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import KanbanLightContext from '../../utils/KanbanLightContext';
 
+/* Import Less style */
+import './CheckList.less';
+
 export default class CheckList extends Component {
   /* eslint-disable no-param-reassign */
   onAddTaskKeyPress(event, taskCallbacks) {
@@ -26,7 +29,8 @@ export default class CheckList extends Component {
                 >
                   <input
                     checked={task.done}
-                    onChange={taskCallbacks.toggle.bind(
+                    onChange={taskCallbacks.toggle
+                    && taskCallbacks.toggle.bind(
                       null,
                       cardId,
                       task.id,
@@ -37,7 +41,8 @@ export default class CheckList extends Component {
                   {`${task.name} `}
                   <button
                     className="checklist__task--remove"
-                    onClick={taskCallbacks.delete.bind(
+                    onClick={taskCallbacks.delete
+                    && taskCallbacks.delete.bind(
                       null,
                       cardId,
                       task.id,
