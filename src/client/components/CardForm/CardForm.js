@@ -10,7 +10,9 @@ export default class CardForm extends Component {
   }
 
   handleFormChange = (field, event) => {
-    this.props.handleFormChange(field, event);
+    if (event && event.target && event.target.value) {
+      this.props.handleFormChange(field, event.target.value);
+    }
   }
 
   handleFormSubmit = (event) => {
@@ -26,16 +28,19 @@ export default class CardForm extends Component {
             <input
               id="cardForm--title"
               onChange={this.handleFormChange.bind(this, 'title')}
+              placeholder="Please input the title"
               required
               type="text"
               value={draftCard.title}
             />
+            <br />
             <textarea
               id="cardForm--description"
               onChange={this.handleFormChange.bind(this, 'description')}
               placeholder="Please input the description"
               value={draftCard.description}
             />
+            <br />
             <label
               id="cardForm__label--status"
               htmlFor="cardForm--status"
@@ -55,9 +60,10 @@ export default class CardForm extends Component {
             <label
               id="cardForm__label--color"
               htmlFor="cardForm--color"
-            />
+            >
+              Color
+            </label>
             <input
-              defaultValue="#ff0000"
               id="cardForm--color"
               onChange={this.handleFormChange.bind(this, 'color')}
               type="color"
@@ -96,4 +102,13 @@ CardForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   handleFormChange: PropTypes.func.isRequired,
   handleFormSubmit: PropTypes.func.isRequired
+};
+
+CardForm.defaultProps = {
+  draftCard: {
+    color: '#ff0000',
+    description: '',
+    status: 'T',
+    title: ''
+  }
 };
